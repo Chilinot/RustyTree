@@ -60,4 +60,17 @@ fn main() {
     tree.add(121212121);
 
     tree.print();
+
+    let mut string_tree = Node::new("Tjenare");
+
+    string_tree.add("Halloj");
+    string_tree.add("tjosan");
+    string_tree.add("Is it working?");
+    string_tree.add("Sorted");
+    string_tree.add("Ö");
+    string_tree.add("A");
+    string_tree.add("C");
+    string_tree.add("B");
+
+    string_tree.print();
 }
