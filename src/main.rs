@@ -1,29 +1,35 @@
-struct BinaryTree {
-    value: i32,
-    left: Option<Box<BinaryTree>>,
-    right: Option<Box<BinaryTree>>,
+// Trait for displaying values. Our generic needs this for the print method.
+use std::fmt::Display;
+
+/// Link to a new node
+type Link<T> = Option<Box<Node<T>>>;
+
+struct Node<T: Ord + Display> {
+    value: T,
+    left: Link<T>,
+    right: Link<T>,
 }
 
-impl BinaryTree {
-    fn new(value: i32) -> BinaryTree {
-        BinaryTree {
+impl<T: Ord + Display> Node<T> {
+    fn new(value: T) -> Node<T> {
+        Node {
             value: value,
             left: None,
             right: None,
         }
     }
 
-    fn add(&mut self, value: i32) {
+    fn add(&mut self, value: T) {
         if value < self.value {
             match self.left {
                 Option::Some(ref mut l) => l.add(value),
-                Option::None => self.left = Option::Some(Box::new(BinaryTree::new(value))),
+                Option::None => self.left = Option::Some(Box::new(Node::new(value))),
             }
         }
         else {
             match self.right {
                 Option::Some(ref mut r) => r.add(value),
-                Option::None => self.right = Option::Some(Box::new(BinaryTree::new(value))),
+                Option::None => self.right = Option::Some(Box::new(Node::new(value))),
             }
         }
     }
@@ -44,7 +50,7 @@ impl BinaryTree {
 }
 
 fn main() {
-    let mut tree = BinaryTree::new(12);
+    let mut tree = Node::new(12);
 
     tree.add(1);
     tree.add(2);

@@ -1,4 +1,4 @@
 [package]
-name = "binary_tree"
+name = "rusty_tree"
 version = "0.1.0"
 authors = ["Lucas Arnström <lucasarnstrom@gmail.com>"]
