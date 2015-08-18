@@ -11,6 +11,9 @@ struct Node<T> {
 }
 
 impl<T: Ord + Display> Node<T> {
+
+    /// Constructor.
+    /// Creates a new binary tree where the root has the given value.
     fn new(value: T) -> Node<T> {
         Node {
             value: value,
@@ -19,6 +22,7 @@ impl<T: Ord + Display> Node<T> {
         }
     }
 
+    /// Adds a new node with the given value to a pre-existing tree.
     fn add(&mut self, value: T) {
         if value < self.value {
             match self.left {
@@ -34,6 +38,7 @@ impl<T: Ord + Display> Node<T> {
         }
     }
 
+    /// Prints the tree to the console.
     fn print(&self) {
         match self.left {
             Option::Some(ref l) => l.print(),
