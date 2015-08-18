@@ -4,7 +4,7 @@ use std::fmt::Display;
 /// Link to a new node
 type NodeLink<T> = Option<Box<Node<T>>>;
 
-struct Node<T: Ord + Display> {
+struct Node<T> {
     value: T,
     left: NodeLink<T>,
     right: NodeLink<T>,
