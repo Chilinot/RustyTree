@@ -2,12 +2,12 @@
 use std::fmt::Display;
 
 /// Link to a new node
-type NodeLinke<T> = Option<Box<Node<T>>>;
+type NodeLink<T> = Option<Box<Node<T>>>;
 
 struct Node<T: Ord + Display> {
     value: T,
-    left: NodeLinke<T>,
-    right: NodeLinke<T>,
+    left: NodeLink<T>,
+    right: NodeLink<T>,
 }
 
 impl<T: Ord + Display> Node<T> {
