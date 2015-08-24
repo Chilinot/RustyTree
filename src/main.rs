@@ -1,7 +1,7 @@
-// Declare that we want to use the module "binary_tree"
+// Tell the compiler to insert the binary_tree module here.
 mod binary_tree;
 
-// Import the Node struct in the binary_tree module
+// Import the Node struct from the binary_tree module.
 use binary_tree::Node;
 
 fn main() {

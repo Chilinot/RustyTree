@@ -1,6 +1,7 @@
+// Import the Display trait from the fmt module. Needed for format function.
 use std::fmt::Display;
 
-/// Link to a new node
+// Link to a new node
 type NodeLink<T> = Option<Box<Node<T>>>;
 
 pub struct Node<T> {
@@ -9,6 +10,7 @@ pub struct Node<T> {
     right: NodeLink<T>,
 }
 
+// Type T needs to have the Ord (for ordering) and Display (for formatting) traits.
 impl<T: Ord + Display> Node<T> {
 
     /// Constructor.
