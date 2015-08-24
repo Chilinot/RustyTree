@@ -1,5 +1,7 @@
+// Declare that we want to use the module "binary_tree"
 mod binary_tree;
 
+// Import the Node struct in the binary_tree module
 use binary_tree::Node;
 
 fn main() {
@@ -12,7 +14,7 @@ fn main() {
     tree.add(2);
     tree.add(121212121);
 
-    tree.print();
+    println!("{}", tree.format());
 
     let mut string_tree = Node::new("Tjenare");
 
@@ -25,5 +27,5 @@ fn main() {
     string_tree.add("C");
     string_tree.add("B");
 
-    string_tree.print();
+    println!("{}", string_tree.format());
 }

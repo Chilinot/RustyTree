@@ -1,4 +1,3 @@
-// Trait for displaying values. Our generic needs this for the print method.
 use std::fmt::Display;
 
 /// Link to a new node
@@ -38,18 +37,19 @@ impl<T: Ord + Display> Node<T> {
         }
     }
 
-    /// Prints the tree to the console.
-    pub fn print(&self) {
-        match self.left {
-            Option::Some(ref l) => l.print(),
-            Option::None => (),
-        }
+    pub fn format(&self) -> String {
+        format!("{}{}{}", 
+            match self.left {
+                Option::Some(ref l) => l.format(),
+                Option::None => format!(""),
+            },
 
-        println!("{}", self.value);
+            format!("{}\n", self.value),
 
-        match self.right {
-            Option::Some(ref r) => r.print(),
-            Option::None => (),
-        }
+            match self.right {
+                Option::Some(ref r) => r.format(),
+                Option::None => format!(""),
+            }
+        )
     }
 }
