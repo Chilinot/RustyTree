@@ -24,17 +24,23 @@ impl<T: Ord + Display> Node<T> {
     }
 
     /// adds a new Node with The given value To a pre-existing Tree.
-    pub fn add(&mut self, value: T) {
+    pub fn add(&mut self, value: T, ack: u32) -> u32 {
         if value < self.value {
             match self.left {
-                Option::Some(ref mut l) => l.add(value),
-                Option::None => self.left = Option::Some(Box::new(Node::new(value))),
+                Option::Some(ref mut l) => l.add(value, ack + 1),
+                Option::None => {
+                    self.left = Option::Some(Box::new(Node::new(value)));
+                    ack + 1
+                },
             }
         }
         else {
             match self.right {
-                Option::Some(ref mut r) => r.add(value),
-                Option::None => self.right = Option::Some(Box::new(Node::new(value))),
+                Option::Some(ref mut r) => r.add(value, ack + 1),
+                Option::None => {
+                    self.right = Option::Some(Box::new(Node::new(value)));
+                    ack + 1
+                },
             }
         }
     }

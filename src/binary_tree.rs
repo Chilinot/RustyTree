@@ -25,12 +25,19 @@ impl<T: Ord + Display> BinaryTree<T> {
     /// Insert a new value in the tree.
     pub fn insert(&mut self, value: T) {
         //TODO Update tree height!
-        match self.root {
-            Option::Some(ref mut root_node) => root_node.add(value),
-            Option::None => self.root = Option::Some(Box::new(Node::new(value))),
-        }
+        let height: u32 = match self.root {
+            Option::Some(ref mut root_node) => root_node.add(value, 1),
+            Option::None => {
+                self.root = Option::Some(Box::new(Node::new(value)));
+                1_u32 // Return the height: 1
+            }
+        };
         
         self.node_amount += 1;
+
+        if self.max_height < height {
+            self.max_height = height;
+        }
     }
 
     /// Return an ordered string representation of the values stored inside the tree.
@@ -44,5 +51,9 @@ impl<T: Ord + Display> BinaryTree<T> {
     /// Get the current size of the tree.
     pub fn get_size(&self) -> u32 {
         self.node_amount
+    }
+
+    pub fn get_height(&self) -> u32 {
+        self.max_height
     }
 }
