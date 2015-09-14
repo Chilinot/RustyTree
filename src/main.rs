@@ -1,7 +1,7 @@
 // Tell the compiler we want the external library "rusty_tree"
 extern crate rusty_tree;
 
-// Import the Node struct from the binary_tree module.
+// Import the BinaryTree struct from the binary_tree module.
 use rusty_tree::binary_tree::BinaryTree;
 
 fn main() {
