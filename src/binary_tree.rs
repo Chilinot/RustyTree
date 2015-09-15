@@ -1,14 +1,16 @@
+// Stdlib
+use std::fmt::Display;
+
+// Node module
 use node::Node;
 use node::NodeLink;
-
-use std::fmt::Display;
 
 // This struct is used to store metadata about the tree, such as the current height of the tree, 
 // or amount of nodes within it.
 pub struct BinaryTree<T> {
     root: NodeLink<T>, // The beginning of the tree.
-    max_height: u32, // The longest branch in the tree, from root to leaf has this many nodes in its path.
-    node_amount: u32, // The amount of nodes currently stored in this tree.
+    max_height: u32,   // The longest branch in the tree, from root to leaf has this many nodes in its path.
+    node_amount: u32,  // The amount of nodes currently stored in this tree.
 }
 
 impl<T: Ord + Display> BinaryTree<T> {
