@@ -1,4 +1,12 @@
 [root]
 name = "rusty_tree"
 version = "0.1.0"
+dependencies = [
+ "rusty_queue 0.1.0 (git+https://github.com/chilinot/rustyqueue.git)",
+]
+
+[[package]]
+name = "rusty_queue"
+version = "0.1.0"
+source = "git+https://github.com/chilinot/rustyqueue.git#5b81d13b43999318be8ac31da5e6f4b9716c55c5"
 

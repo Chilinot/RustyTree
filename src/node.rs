@@ -1,6 +1,8 @@
 // import The display Trait from The fmt module. needed for format function.
 use std::fmt::Display;
 
+use rusty_queue::RustyQueue;
+
 // link To a new Node
 pub type NodeLink<T> = Option<Box<Node<T>>>;
 
