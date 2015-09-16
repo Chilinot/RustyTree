@@ -8,5 +8,5 @@ dependencies = [
 [[package]]
 name = "rusty_queue"
 version = "0.1.0"
-source = "git+https://github.com/chilinot/rustyqueue.git#5b81d13b43999318be8ac31da5e6f4b9716c55c5"
+source = "git+https://github.com/chilinot/rustyqueue.git#b263bccd8682b9db74146230cb09122708ebdcf8"
 

@@ -63,33 +63,34 @@ impl<T: Ord + Display> Node<T> {
         )
     }
 
-    pub fn breadth_first_format(&self) -> RustyQueue<&Node<T>> {
-        let mut v_queue = RustyQueue::new(); // This queue is used for correct visitation order.
-        let mut r_queue = RustyQueue::new(); // This queue is the one returned.
+    pub fn breadth_first_format(&self) -> String {
+        let mut queue: RustyQueue<&Node<T>> = RustyQueue::new();
 
-        r_queue.enqueue(&self);
-        v_queue.enqueue(&self);
+        let mut s = String::new();
+
+        queue.enqueue(&self);
         
-        while !v_queue.is_empty() {
+        while !queue.is_empty() {
             
-            let current: &Node<T> = v_queue.dequeue();
+            let current = match queue.dequeue() {
+                Result::Ok(ref n) => n,
+                Result::Err(err) => panic!(err),
+            };
+
+            s.push_str(format!("{}, ", current.value).as_str());
 
             match current.left {
-                Option::Some(ref n) => {
-                    r_queue.enqueue(n);
-                    v_queue.enqueue(n);
-                },
-                Option::None() => (),
+                Option::Some(ref n) => queue.enqueue(n),
+                Option::None => (),
             };
 
             match current.right {
-                Option::Some(ref n) => {
-                    r_queue.enqueue(n);
-                    v_queue.enqueue(n);
-                },
-                Option::None() => (),
+                Option::Some(ref n) => queue.enqueue(n),
+                Option::None => (),
             };
         }
-    }
+
+        // Return s
+        s
     }
 }
