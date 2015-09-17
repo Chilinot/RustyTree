@@ -16,7 +16,8 @@ fn main() {
 
     println!("{}", tree.format());
     println!("Node amount: {}", tree.get_size());
-    println!("Height: {}\n", tree.get_height());
+    println!("Height: {}", tree.get_height());
+    println!("{}\n", tree.breadth_first_format().unwrap());
 
     let mut string_tree = BinaryTree::new();
 
@@ -32,6 +33,7 @@ fn main() {
     println!("{}", string_tree.format());
     println!("Node amount: {}", string_tree.get_size());
     println!("Height: {}\n", string_tree.get_height());
+    println!("{}\n", string_tree.breadth_first_format().unwrap());
 
 
     let mut ub_tree = BinaryTree::new();
@@ -47,5 +49,6 @@ fn main() {
 
     println!("{}", ub_tree.format());
     println!("Node amount: {}", ub_tree.get_size());
-    println!("Height: {}\n", ub_tree.get_height());
+    println!("Height: {}", ub_tree.get_height());
+    println!("{}\n", ub_tree.breadth_first_format().unwrap());
 }
