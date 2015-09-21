@@ -90,4 +90,63 @@ impl<T: Ord + Display> BinaryTree<T> {
         // Return the formatted string
         Ok(s)
     }
+
+    pub fn display(&self) {
+        let mut queue: RustyQueue<Option<&Node<T>>> = RustyQueue::new();
+
+        // Add the root pointer to the queue
+        match self.root {
+            Option::Some(ref n) => queue.enqueue(Some(n)),
+            Option::None => {
+                println!("The tree is empty!");
+                return;
+            },
+        };
+
+        // Calculate the maximum amount of nodes there can be in the given tree based on its
+        // current height.
+        let levels: Vec<u32> = (1_u32..self.height as u32).collect();
+        let max_nodes:u32 = 1 + levels.iter().fold(0, |acc, &item| acc + 2_u32.pow(item));
+
+        let mut counter = 0;
+        while !queue.is_empty() {
+            counter += 1;
+
+            // Stop the loop if we have reached the maximum amount of nodes.
+            if counter > max_nodes {
+                break;
+            }
+
+            // Since the queue is ensured not to be empty the unwrap will not cause a panic.
+            let node = queue.dequeue().unwrap(); 
+
+            match node {
+                Option::Some(n) => {
+                    print!("{}\t", n.value);
+
+                    match n.left {
+                        Option::Some(ref n) => queue.enqueue(Some(n)),
+                        Option::None => queue.enqueue(None),
+                    }
+
+                    match n.right {
+                        Option::Some(ref n) => queue.enqueue(Some(n)),
+                        Option::None => queue.enqueue(None),
+                    }
+                },
+                Option::None => {
+                    print!("x\t");
+                    queue.enqueue(None);
+                    queue.enqueue(None);
+                },
+            }
+
+            //TODO Remove hardcoded node values to a dynamic calculator.
+            // Insert a linebreak after the given nodes.
+            match counter {
+                1|3|7|15|31|63|127|255 => println!(""),
+                _ => (),
+            }
+        }
+    }
 }
