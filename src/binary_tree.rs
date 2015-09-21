@@ -24,7 +24,6 @@ impl<T: Ord + Display> BinaryTree<T> {
 
     /// Insert a new value in the tree.
     pub fn insert(&mut self, value: T) {
-        //TODO Update tree height!
         let height: usize = match self.root {
             Option::Some(ref mut root_node) => root_node.add(value, 1),
             Option::None => {
@@ -111,14 +110,7 @@ impl<T: Ord + Display> BinaryTree<T> {
         let levels: Vec<u32> = (1_u32..self.height as u32).collect();
         let max_nodes:u32 = 1 + levels.iter().fold(0, |acc, &level| acc + 2_u32.pow(level));
 
-        let mut counter = 0;
-        loop {
-            counter += 1;
-
-            // Stop the loop if we have reached the maximum amount of nodes.
-            if counter > max_nodes {
-                break;
-            }
+        for counter in (1..max_nodes + 1) {
 
             let node = match queue.dequeue() {
                 Result::Ok(n) => n,
