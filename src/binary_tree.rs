@@ -40,7 +40,7 @@ impl<T: Ord + Display> BinaryTree<T> {
         }
     }
 
-    /// Return an ordered string representation of the values stored inside the tree.
+    /// Returns an ordered string representation of the values stored inside the tree.
     pub fn format(&self) -> String {
         match self.root {
             Option::Some(ref root_node) => root_node.format(),
@@ -48,15 +48,17 @@ impl<T: Ord + Display> BinaryTree<T> {
         }
     }
 
-    /// Get the current size of the tree.
+    /// Returns the amount of nodes currently in the tree.
     pub fn get_size(&self) -> usize {
         self.node_amount
     }
 
+    /// Returns the height of the tree.
     pub fn get_height(&self) -> usize {
         self.height
     }
     
+    /// Return a formatted string according to the breadth first algorithm.
     pub fn breadth_first_format(&self) -> Result<String, &str> {
         let mut queue: RustyQueue<&Node<T>> = RustyQueue::new();
 
@@ -91,6 +93,7 @@ impl<T: Ord + Display> BinaryTree<T> {
         Ok(s)
     }
 
+    /// Displays the tree to the console.
     pub fn display(&self) {
         let mut queue: RustyQueue<Option<&Node<T>>> = RustyQueue::new();
 
@@ -106,10 +109,10 @@ impl<T: Ord + Display> BinaryTree<T> {
         // Calculate the maximum amount of nodes there can be in the given tree based on its
         // current height.
         let levels: Vec<u32> = (1_u32..self.height as u32).collect();
-        let max_nodes:u32 = 1 + levels.iter().fold(0, |acc, &item| acc + 2_u32.pow(item));
+        let max_nodes:u32 = 1 + levels.iter().fold(0, |acc, &level| acc + 2_u32.pow(level));
 
         let mut counter = 0;
-        while !queue.is_empty() {
+        loop {
             counter += 1;
 
             // Stop the loop if we have reached the maximum amount of nodes.
@@ -117,12 +120,17 @@ impl<T: Ord + Display> BinaryTree<T> {
                 break;
             }
 
-            // Since the queue is ensured not to be empty the unwrap will not cause a panic.
-            let node = queue.dequeue().unwrap(); 
+            let node = match queue.dequeue() {
+                Result::Ok(n) => n,
+                Result::Err(m) => {
+                    println!("Error! Message: {}", m);
+                    return;
+                },
+            };
 
             match node {
                 Option::Some(n) => {
-                    print!("{}\t", n.value);
+                    print!("{}    ", n.value);
 
                     match n.left {
                         Option::Some(ref n) => queue.enqueue(Some(n)),
@@ -135,7 +143,7 @@ impl<T: Ord + Display> BinaryTree<T> {
                     }
                 },
                 Option::None => {
-                    print!("x\t");
+                    print!("x    ");
                     queue.enqueue(None);
                     queue.enqueue(None);
                 },
