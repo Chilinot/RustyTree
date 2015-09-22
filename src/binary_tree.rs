@@ -110,7 +110,7 @@ impl<T: Ord + Display> BinaryTree<T> {
         let levels: Vec<u32> = (1_u32..self.height as u32).collect();
         let max_nodes:u32 = 1 + levels.iter().fold(0, |acc, &level| acc + 2_u32.pow(level));
 
-        for counter in (0..max_nodes) {
+        for counter in (1..max_nodes+1) {
 
             let node = match queue.dequeue() {
                 Result::Ok(n) => n,
